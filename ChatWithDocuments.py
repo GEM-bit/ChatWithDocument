@@ -88,7 +88,7 @@ if __name__ == "__main__":
 
     st.image('LogoBlue.png',width=50)
     st.subheader('LLM Question Answering Application :information_desk_person:')
-    st.write('This app allows you to select and load a file and then have a question/answer chat with the content of the file.')
+    st.write('Select and load a file and then have a question/answer chat with the content of that file.')
 
     with st.sidebar:
         #api_key=st.text_input('OpenAI API Key: ',type='password')    #If user doesn't have access to dotenv
@@ -111,7 +111,7 @@ if __name__ == "__main__":
                 chunks=chunk_data(data,chunk_size=chunk_size)
                 st.write(f'Chunk size: {chunk_size}, Chunks: {len(chunks)}')
                 tokens, embedding_cost = calculate_embedding_cost(chunks)
-                st.write(f'Embedding cost: R{embedding_cost:.4f}')
+                st.write(f'Embedding cost: R{embedding_cost}')
                 
                 vector_store = create_embeddings(chunks)
                 st.session_state.vs = vector_store

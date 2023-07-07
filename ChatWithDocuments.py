@@ -3,6 +3,11 @@ from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.vectorstores import Chroma
 import os
 
+st.set_page_config(
+    page_title='LLM QA File', 
+    page_icon=":information_desk_person:", 
+    menu_items=None)
+
 #Load  file 
 def load_document(file):
     import os
@@ -114,7 +119,7 @@ if __name__ == "__main__":
             answer = ask_and_get_answer(vector_store,q,k=3)
             st.text_area(label='LLM answer: ',value=answer)
 
-            st.divider
+            st.divider()
 
             if 'history' not in st.session_state:
                 st.session_state.history =''

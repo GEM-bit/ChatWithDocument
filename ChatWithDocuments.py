@@ -85,9 +85,9 @@ if __name__ == "__main__":
     st.subheader('LLM Question Answering Application :information_desk_person:')
 
     with st.sidebar:
-        api_key=st.text_input('OpenAI API Key: ',type='password')    #If user doesn't have access to dotenv
-        if api_key:                  # If user entered key
-            os.environ['OPENAI_API_KEY'] = api_key
+        #api_key=st.text_input('OpenAI API Key: ',type='password')    #If user doesn't have access to dotenv
+        #if api_key:                  # If user entered key
+        #    os.environ['OPENAI_API_KEY'] = api_key
 
         uploaded_file=st.file_uploader('Upload a file',type=["pdf","txt","docx"])
         chunk_size=st.number_input('Chunk size: ',min_value=100,max_value=2048,value=512,on_change=clear_history)
@@ -105,7 +105,7 @@ if __name__ == "__main__":
                 chunks=chunk_data(data,chunk_size=chunk_size)
                 st.write(f'Chunk size: {chunk_size}, Chunks: {len(chunks)}')
                 tokens, embedding_cost = calculate_embedding_cost(chunks)
-                st.write('Embeddings Cost: R{embedding_cost:.4f}')    #Display with 4 decimal points
+                st.write('Embeddings Cost: R{embedding_cost}')    
                 
                 vector_store = create_embeddings(chunks)
                 st.session_state.vs=vector_store
@@ -123,7 +123,7 @@ if __name__ == "__main__":
 
             if 'history' not in st.session_state:
                 st.session_state.history =''
-            value=(f'Q: {q} /nAnswer: (answer)')
+            value=(f'Q: {q} /nAnswer: {answer}')
             st.session_state.history = f'{value} /n{"-" * 50} /n {st.session_state.history}'
             h = st.session_state.history
-            st.text_area(label='Chat History',value=h, key="history", height=400)
+            st.text_area(label='Chat History',value=h, height=400)

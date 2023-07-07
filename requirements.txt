@@ -8,3 +8,5 @@ streamlit
 chromadb                   
 python-dotenv
 tiktoken
+pypdf
+textloader

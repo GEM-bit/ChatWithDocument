@@ -1,12 +1,11 @@
 #Prompt user to load a file and then allow them to have a aquestion and answer chat with that file
 #Gillian Metcalf 07/07/2023
 
-#Putdocument loader spinner on main sscreen and remove # chunks and cost
 #Correct history 
-
 
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.vectorstores import Chroma
+import streamlit as st
 import platform
 
 st.set_page_config(

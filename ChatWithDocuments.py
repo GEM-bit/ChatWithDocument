@@ -1,6 +1,13 @@
-import streamlit as st
+#Prompt user to load a file and then allow them to have a aquestion and answer chat with that file
+#Gillian Metcalf 07/07/2023
+
+#Putdocument loader spinner on main sscreen and remove # chunks and cost
+#Correct history 
+
+
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.vectorstores import Chroma
+import platform
 
 st.set_page_config(
     page_title='LLM QA File', 
@@ -84,10 +91,16 @@ if __name__ == "__main__":
     load_dotenv(find_dotenv(), override=True)
 
     st.subheader('LLM Question-Answering Application :information_desk_person:')
+
+    if 'mobile' in platform.platform().lower():
+        print('Click here to enter file ')
+
     with st.sidebar:
         
         # file uploader widget
         uploaded_file = st.file_uploader('Upload a file:', type=['pdf', 'docx', 'txt'])
+        
+        st.markdown('<p font-size:10px>(try saconstitution.pdf)</p>', unsafe_allow_html=True)
 
         # chunk size number widget
         chunk_size = st.number_input('Chunk size:', min_value=100, max_value=2048, value=512, on_change=clear_history)
@@ -109,10 +122,10 @@ if __name__ == "__main__":
 
                 data = load_document(file_name)
                 chunks = chunk_data(data, chunk_size=chunk_size)
-                st.write(f'Chunk size: {chunk_size}, Chunks: {len(chunks)}')
+                #st.write(f'Chunk size: {chunk_size}, Chunks: {len(chunks)}')
 
                 tokens, embedding_cost = calculate_embedding_cost(chunks)
-                st.write(f'Embedding cost: R{embedding_cost:}')
+                #st.write(f'Embedding cost: R{embedding_cost:}')
 
                 # creating the embeddings and returning the Chroma vector store
                 vector_store = create_embeddings(chunks)

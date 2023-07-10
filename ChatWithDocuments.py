@@ -94,22 +94,22 @@ if __name__ == "__main__":
     if 'mobile' in platform.platform().lower():
         print('Click here to enter file ')
 
-    with st.sidebar:
-        
-        # file uploader widget
-        uploaded_file = st.file_uploader('Upload a file:', type=['pdf', 'docx', 'txt'])
-        
-        st.markdown('<p font-size:10px>(try saconstitution.pdf)</p>', unsafe_allow_html=True)
+    #with st.sidebar:
 
+
+    with st.expander("Load file"):
+        # file uploader widget
+        uploaded_file = st.file_uploader('Upload a file:', type=['pdf', 'docx', 'txt'])        
+        st.markdown('<p font-size:10px>(try saconstitution.pdf)</p>', unsafe_allow_html=True)
         # chunk size number widget
         chunk_size = st.number_input('Chunk size:', min_value=100, max_value=2048, value=512, on_change=clear_history)
-
         # k number input widget
         k = st.number_input('k', min_value=1, max_value=20, value=3, on_change=clear_history)
-
         # add data button widget
         add_data = st.button('Add Data', on_click=clear_history)
-
+        expanded=True
+      
+        
         if uploaded_file and add_data: # if the user browsed a file
             with st.spinner('Reading, chunking and embedding file ...'):
 
